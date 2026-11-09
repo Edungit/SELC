@@ -61,13 +61,13 @@ export default async function DashboardPage(){
       <Link href="/admin/invitations" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><Users size={18}/> Staff invitations <ArrowUpRight className="ml-auto" size={14}/></Link>
      </nav></>}
     </div>
-    <div className="mt-auto border-t border-white/10 p-5"><div className="rounded-xl bg-white/[.07] p-4"><div className="flex items-center gap-2 text-xs font-semibold text-blue-100"><ShieldCheck size={16}/> Secure staff access</div><p className="mt-2 text-[11px] leading-5 text-blue-100/65">Your portal access is protected by your assigned SELC role.</p></div><p className="mt-5 text-[10px] text-blue-200/50">© {new Date().getFullYear()} South East London Care</p></div>
+    <div className="mt-auto border-t border-white/10 p-5"><div className="rounded-xl bg-white/[.07] p-4"><div className="flex items-center gap-2 text-xs font-semibold text-blue-100"><ShieldCheck size={16}/> Secure staff access</div><p className="mt-2 text-[11px] leading-5 text-blue-100/65">Your portal access is protected by your assigned South East London Care role.</p></div><p className="mt-5 text-[10px] text-blue-200/50">© {new Date().getFullYear()} South East London Care</p></div>
    </aside>
 
    <div className="min-w-0">
     <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/95 backdrop-blur">
      <div className="flex h-[76px] items-center justify-between gap-4 px-5 sm:px-8 xl:px-10">
-      <div className="flex items-center gap-3 lg:hidden"><Logo compact/><div><p className="text-sm font-bold text-selc-navy">SELC Staff Portal</p><p className="text-[10px] text-slate-500">South East London Care</p></div></div>
+      <div className="flex items-center gap-3 lg:hidden"><Logo compact/><div><p className="text-sm font-bold text-selc-navy">South East London Care Staff Portal</p><p className="text-[10px] text-slate-500">South East London Care</p></div></div>
       <div className="hidden lg:block"><p className="text-xs font-medium text-slate-500">Staff workspace</p><p className="mt-1 text-sm font-semibold text-selc-navy">Your dashboard</p></div>
       <div className="flex items-center gap-3">
        <div className="hidden text-right sm:block"><p className="text-sm font-semibold text-slate-800">{displayName}</p><p className="mt-0.5 text-xs text-slate-500">{primaryRole}</p></div>
@@ -79,14 +79,14 @@ export default async function DashboardPage(){
 
     <main className="mx-auto max-w-[1500px] px-5 py-7 sm:px-8 sm:py-9 xl:px-10">
      <div className="mb-7 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-      <div><p className="text-xs font-bold uppercase tracking-[.18em] text-selc-red">Your SELC workspace</p><h1 className="mt-2 text-2xl font-bold tracking-tight text-selc-navy sm:text-3xl">Good to have you here, {displayName}.</h1><p className="mt-2 text-sm text-slate-500">A central place for your staff information, documents and company updates.</p></div>
+      <div><p className="text-xs font-bold uppercase tracking-[.18em] text-selc-red">Your South East London Care workspace</p><h1 className="mt-2 text-2xl font-bold tracking-tight text-selc-navy sm:text-3xl">Good to have you here, {displayName}.</h1><p className="mt-2 text-sm text-slate-500">A central place for your staff information, documents and company updates.</p></div>
       <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700"><CheckCircle2 size={14}/> Account active</div>
      </div>
 
      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#102746] via-[#153967] to-[#1c477d] p-6 text-white shadow-[0_16px_40px_rgba(16,39,70,.16)] sm:p-8">
       <div className="pointer-events-none absolute -right-12 -top-24 h-72 w-72 rounded-full border-[42px] border-white/[.06]"/>
       <div className="pointer-events-none absolute -bottom-36 right-48 h-64 w-64 rounded-full bg-[#c9343d]/20 blur-3xl"/>
-      <div className="relative z-10 max-w-2xl"><div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold text-blue-100"><Activity size={13}/> SELC STAFF PORTAL</div><h2 className="mt-5 text-2xl font-bold leading-tight sm:text-3xl">Everything you need to stay connected.</h2><p className="mt-3 max-w-xl text-sm leading-6 text-blue-100/85">Use your workspace to maintain your staff information and access the tools made available to your role.</p><div className="mt-5 flex flex-wrap gap-2">{roles.map(role=><span key={role} className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold">{roleLabels[role]??role}</span>)}</div></div>
+      <div className="relative z-10 max-w-2xl"><div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold text-blue-100"><Activity size={13}/> SOUTH EAST LONDON CARE STAFF PORTAL</div><h2 className="mt-5 text-2xl font-bold leading-tight sm:text-3xl">Everything you need to stay connected.</h2><p className="mt-3 max-w-xl text-sm leading-6 text-blue-100/85">Use your workspace to maintain your staff information and access the tools made available to your role.</p><div className="mt-5 flex flex-wrap gap-2">{roles.map(role=><span key={role} className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold">{roleLabels[role]??role}</span>)}</div></div>
      </section>
 
      {canManage&&<section className="mt-7">
