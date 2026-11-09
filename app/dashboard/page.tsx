@@ -52,8 +52,8 @@ export default async function DashboardPage(){
      <p className="px-3 text-[10px] font-bold uppercase tracking-[.2em] text-blue-200/70">Workspace</p>
      <nav className="mt-3 space-y-1">
       <div className="flex items-center gap-3 rounded-xl bg-white/10 px-3 py-3 text-sm font-semibold text-white"><LayoutDashboard size={18}/> Dashboard</div>
-      <div className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75"><UserRound size={18}/> My profile <span className="ml-auto text-[10px] text-blue-200/60">Soon</span></div>
-      <div className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75"><FileCheck2 size={18}/> My documents <span className="ml-auto text-[10px] text-blue-200/60">Soon</span></div>
+      <Link href="/profile" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><UserRound size={18}/> My profile</Link>
+      <Link href="/profile#documents" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><FileCheck2 size={18}/> My documents</Link>
       <div className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75"><MessageSquare size={18}/> Communications <span className="ml-auto text-[10px] text-blue-200/60">Soon</span></div>
      </nav>
      {canManage&&<><p className="mt-9 px-3 text-[10px] font-bold uppercase tracking-[.2em] text-blue-200/70">Management</p><nav className="mt-3 space-y-1">
@@ -98,9 +98,9 @@ export default async function DashboardPage(){
      </section>}
 
      <section className="mt-8">
-      <div className="mb-4"><p className="text-xs font-bold uppercase tracking-[.16em] text-selc-red">Staff resources</p><h2 className="mt-1 text-lg font-bold text-selc-navy">Your workspace</h2><p className="mt-1 text-xs text-slate-500">These modules are being prepared for the next portal releases.</p></div>
+      <div className="mb-4"><p className="text-xs font-bold uppercase tracking-[.16em] text-selc-red">Staff resources</p><h2 className="mt-1 text-lg font-bold text-selc-navy">Your workspace</h2><p className="mt-1 text-xs text-slate-500">Manage your personal details and submit recruitment documents securely.</p></div>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-       {modules.map(item=><article key={item.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_3px_14px_rgba(16,43,85,.035)]"><div className="flex items-center justify-between"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#eef3fa] text-selc-blue"><item.icon size={21}/></div><span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold text-slate-500">Coming soon</span></div><h3 className="mt-5 text-sm font-bold text-selc-navy">{item.title}</h3><p className="mt-2 min-h-[60px] text-xs leading-5 text-slate-500">{item.description}</p><div className="mt-4 border-t border-slate-100 pt-3 text-[10px] font-medium text-slate-400">{item.status}</div></article>)}
+       {modules.map(item=><Link href="/profile" key={item.title} className="block rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_3px_14px_rgba(16,43,85,.035)] transition hover:-translate-y-0.5 hover:border-blue-200"><div className="flex items-center justify-between"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#eef3fa] text-selc-blue"><item.icon size={21}/></div><span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">Available</span></div><h3 className="mt-5 text-sm font-bold text-selc-navy">{item.title}</h3><p className="mt-2 min-h-[60px] text-xs leading-5 text-slate-500">{item.description}</p><div className="mt-4 border-t border-slate-100 pt-3 text-[10px] font-medium text-selc-blue">Open workspace →</div></Link>)}
       </div>
      </section>
 
