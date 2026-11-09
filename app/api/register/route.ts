@@ -8,7 +8,7 @@ try{
  const email=typeof body.email==="string"?body.email.trim().toLowerCase():"";
  const password=typeof body.password==="string"?body.password:"";
  if(!firstName||!lastName||firstName.length>80||lastName.length>80)return NextResponse.json({error:"Enter your first and last name."},{status:400});
- if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)||email.length>254)return NextResponse.json({error:"Enter a valid email address."},{status:400});
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>254)return NextResponse.json({error:"Enter a valid email address."},{status:400});
  if(password.length<12)return NextResponse.json({error:"Password must contain at least 12 characters."},{status:400});
  const supabase=await createClient();const origin=new URL(request.url).origin;
  const {data,error}=await supabase.auth.signUp({email,password,options:{emailRedirectTo:origin+"/auth/callback?next=/pending-approval",data:{first_name:firstName,last_name:lastName}}});
