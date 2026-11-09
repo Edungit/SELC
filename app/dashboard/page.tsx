@@ -53,12 +53,13 @@ export default async function DashboardPage(){
       <div className="flex items-center gap-3 rounded-xl bg-white/10 px-3 py-3 text-sm font-semibold text-white"><LayoutDashboard size={18}/> Dashboard</div>
       <Link href="/profile" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><UserRound size={18}/> My profile</Link>
       <Link href="/profile#documents" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><FileCheck2 size={18}/> My documents</Link>
-      <div className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75"><MessageSquare size={18}/> Communications <span className="ml-auto text-[10px] text-blue-200/60">Soon</span></div>
+      <Link href="/communications" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><MessageSquare size={18}/> Communications</Link>
      </nav>
      {canReviewCompliance&&<><p className="mt-9 px-3 text-[10px] font-bold uppercase tracking-[.2em] text-blue-200/70">Management</p><nav className="mt-3 space-y-1">
       <Link href="/admin/applications" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><ClipboardCheck size={18}/> Staff applications <ArrowUpRight className="ml-auto" size={14}/></Link>
       <Link href="/admin/invitations" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><Users size={18}/> Staff invitations <ArrowUpRight className="ml-auto" size={14}/></Link>
       <Link href="/admin/staff" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><Users size={18}/> Staff directory <ArrowUpRight className="ml-auto" size={14}/></Link>
+      <Link href="/admin/communications" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><MessageSquare size={18}/> Staff communications <ArrowUpRight className="ml-auto" size={14}/></Link>
       <Link href="/admin/compliance" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><ShieldCheck size={18}/> Compliance review <ArrowUpRight className="ml-auto" size={14}/></Link>
      </nav></>}
     </div>
