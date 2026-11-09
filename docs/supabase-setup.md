@@ -72,3 +72,21 @@ Applicant approval/rejection emails use the same Resend configuration. Administr
 - Test with a synthetic applicant email before inviting real staff.
 - Confirm a newly registered account is `pending_review`, cannot open `/dashboard`, and receives no role beyond `staff_member`.
 - Confirm an authorised administrator can approve/reject it and that the applicant receives the outcome email.
+
+
+## Administrator application notification reliability
+
+Apply migration `supabase/migrations/202611090003_admin_notification_tracking.sql` before deploying the notification tracking code. It adds delivery status and error fields to `staff_profiles`.
+
+The email alert is triggered after an applicant confirms their email through `/auth/callback`. It is sent using Resend with `RESEND_API_KEY`, `SELC_EMAIL_FROM`, and `ADMIN_APPROVAL_EMAIL` (default `edunhabeeb@gmail.com`).
+
+The application review page now displays whether the administrator alert was sent, pending, or failed. HR Managers and Super Administrators can use **Send admin alert** to retry a failed or pending alert. Resend API rejection details are stored in `admin_notification_error` and logged by the server.
+
+A Resend API success means Resend accepted the message; it does not guarantee inbox placement. Check Resend Email Logs for Delivered, Bounced, or Failed status.
+
+Deployment sequence:
+1. Apply migration `202611090003_admin_notification_tracking.sql`.
+2. Confirm Vercel Production variables `RESEND_API_KEY`, `SELC_EMAIL_FROM`, and `ADMIN_APPROVAL_EMAIL`.
+3. Deploy the latest `main` branch.
+4. Use an applicant account that has verified its email, then check `/admin/applications`.
+5. If the alert failed or is pending, inspect the stored error and use **Send admin alert** to retry.
