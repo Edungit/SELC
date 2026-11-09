@@ -40,10 +40,8 @@ export default async function DashboardPage(){
   redirect("/login");
  }
  const modules=[
-  {icon:UserRound,title:"My profile",description:"Keep your personal and employment details up to date.",status:"Profile tools in progress"},
-  {icon:FolderOpen,title:"My documents",description:"A secure place for required employment and compliance documents.",status:"Document centre in progress"},
-  {icon:MessageSquare,title:"Staff communications",description:"Company updates and messages from your management team.",status:"Communications in progress"},
-  {icon:CalendarDays,title:"My work",description:"Access work-related information and team updates.",status:"Work tools in progress"}
+  {icon:UserRound,title:"My profile",description:"Maintain your personal information, employment history, referees and work eligibility.",href:"/profile",status:"Available"},
+  {icon:FolderOpen,title:"My documents",description:"Upload and track the recruitment and compliance documents requested for your role.",href:"/profile",status:"Available"}
  ];
  return <div className="min-h-screen bg-[#f4f6fa] text-selc-ink">
   <div className="min-h-screen lg:grid lg:grid-cols-[260px_minmax(0,1fr)]">
@@ -81,28 +79,28 @@ export default async function DashboardPage(){
 
     <main className="mx-auto max-w-[1500px] px-5 py-7 sm:px-8 sm:py-9 xl:px-10">
      <div className="mb-7 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-      <div><p className="text-xs font-bold uppercase tracking-[.18em] text-selc-red">Your South East London Care workspace</p><h1 className="mt-2 text-2xl font-bold tracking-tight text-selc-navy sm:text-3xl">Good to have you here, {displayName}.</h1><p className="mt-2 text-sm text-slate-500">A central place for your staff information, documents and company updates.</p></div>
+      <div><p className="text-xs font-bold uppercase tracking-[.18em] text-selc-red">Your South East London Care workspace</p><h1 className="mt-2 text-2xl font-bold tracking-tight text-selc-navy sm:text-3xl">Good to have you here, {displayName}.</h1><p className="mt-2 text-sm text-slate-500">Access the staff services currently enabled for your account.</p></div>
       <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700"><CheckCircle2 size={14}/> Account active</div>
      </div>
 
      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#102746] via-[#153967] to-[#1c477d] p-6 text-white shadow-[0_16px_40px_rgba(16,39,70,.16)] sm:p-8">
       <div className="pointer-events-none absolute -right-12 -top-24 h-72 w-72 rounded-full border-[42px] border-white/[.06]"/>
       <div className="pointer-events-none absolute -bottom-36 right-48 h-64 w-64 rounded-full bg-[#c9343d]/20 blur-3xl"/>
-      <div className="relative z-10 max-w-2xl"><div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold text-blue-100"><Activity size={13}/> SOUTH EAST LONDON CARE STAFF PORTAL</div><h2 className="mt-5 text-2xl font-bold leading-tight sm:text-3xl">Everything you need to stay connected.</h2><p className="mt-3 max-w-xl text-sm leading-6 text-blue-100/85">Use your workspace to maintain your staff information and access the tools made available to your role.</p><div className="mt-5 flex flex-wrap gap-2">{roles.map(role=><span key={role} className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold">{roleLabels[role]??role}</span>)}</div></div>
+      <div className="relative z-10 max-w-2xl"><div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold text-blue-100"><Activity size={13}/> SOUTH EAST LONDON CARE STAFF PORTAL</div><h2 className="mt-5 text-2xl font-bold leading-tight sm:text-3xl">Your staff information, in one secure workspace.</h2><p className="mt-3 max-w-xl text-sm leading-6 text-blue-100/85">Update your profile, manage your employment information and submit recruitment or compliance documents.</p><div className="mt-5 flex flex-wrap gap-2">{roles.map(role=><span key={role} className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11px] font-semibold">{roleLabels[role]??role}</span>)}</div></div>
      </section>
 
      {canManage&&<section className="mt-7">
       <div className="mb-3 flex items-center justify-between"><div><p className="text-xs font-bold uppercase tracking-[.16em] text-selc-red">Management workspace</p><h2 className="mt-1 text-lg font-bold text-selc-navy">People operations</h2></div><span className="text-xs text-slate-400">Administrator tools</span></div>
       <div className="grid gap-4 md:grid-cols-2">
        <Link href="/admin/applications" className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_3px_14px_rgba(16,43,85,.04)] transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-panel"><div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-50 text-selc-red"><ClipboardCheck size={22}/></div><div className="min-w-0 flex-1"><h3 className="font-bold text-selc-navy">Staff applications</h3><p className="mt-1 text-xs leading-5 text-slate-500">Review registrations and manage applicant decisions.</p></div><ChevronRight className="text-slate-400 transition group-hover:translate-x-1 group-hover:text-selc-blue" size={19}/></Link>
-       <Link href="/admin/invitations" className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_3px_14px_rgba(16,43,85,.04)] transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-panel"><div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-selc-blue"><Users size={22}/></div><div className="min-w-0 flex-1"><h3 className="font-bold text-selc-navy">Staff invitations</h3><p className="mt-1 text-xs leading-5 text-slate-500">Invite existing employees to activate portal access.</p></div><ChevronRight className="text-slate-400 transition group-hover:translate-x-1 group-hover:text-selc-blue" size={19}/></Link>
+       <Link href="/admin/invitations" className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_3px_14px_rgba(16,43,85,.04)] transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-panel"><div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-selc-blue"><Users size={22}/></div><div className="min-w-0 flex-1"><h3 className="font-bold text-selc-navy">Staff invitations</h3><p className="mt-1 text-xs leading-5 text-slate-500">Invite employees and assign portal roles.</p></div><ChevronRight className="text-slate-400 transition group-hover:translate-x-1 group-hover:text-selc-blue" size={19}/></Link>
       </div>
      </section>}
 
      <section className="mt-8">
       <div className="mb-4"><p className="text-xs font-bold uppercase tracking-[.16em] text-selc-red">Staff resources</p><h2 className="mt-1 text-lg font-bold text-selc-navy">Your workspace</h2><p className="mt-1 text-xs text-slate-500">Manage your personal details and submit recruitment documents securely.</p></div>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-       {modules.map(item=><Link href="/profile" key={item.title} className="block rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_3px_14px_rgba(16,43,85,.035)] transition hover:-translate-y-0.5 hover:border-blue-200"><div className="flex items-center justify-between"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#eef3fa] text-selc-blue"><item.icon size={21}/></div><span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">Available</span></div><h3 className="mt-5 text-sm font-bold text-selc-navy">{item.title}</h3><p className="mt-2 min-h-[60px] text-xs leading-5 text-slate-500">{item.description}</p><div className="mt-4 border-t border-slate-100 pt-3 text-[10px] font-medium text-selc-blue">Open workspace →</div></Link>)}
+      <div className="grid gap-4 sm:grid-cols-2">
+       {modules.map(item=><Link href={item.href} key={item.title} className="block rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_3px_14px_rgba(16,43,85,.035)] transition hover:-translate-y-0.5 hover:border-blue-200"><div className="flex items-center justify-between"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#eef3fa] text-selc-blue"><item.icon size={21}/></div><span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">Available</span></div><h3 className="mt-5 text-sm font-bold text-selc-navy">{item.title}</h3><p className="mt-2 min-h-[60px] text-xs leading-5 text-slate-500">{item.description}</p><div className="mt-4 border-t border-slate-100 pt-3 text-[10px] font-medium text-selc-blue">Open workspace →</div></Link>)}
       </div>
      </section>
 
