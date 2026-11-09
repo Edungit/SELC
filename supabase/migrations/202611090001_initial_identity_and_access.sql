@@ -114,11 +114,8 @@ create policy "Privileged admins insert profiles"
 on public.staff_profiles for insert to authenticated
 with check (public.current_user_is_privileged());
 
-create policy "Privileged admins manage role assignments"
-on public.user_role_assignments for all to authenticated
-using (public.current_user_is_privileged())
-with check (public.current_user_is_privileged());
-
+-- Role changes are performed only by trusted server-side administrative
+-- operations after validating the actor's authority and target role.
 create policy "Users read own role assignments"
 on public.user_role_assignments for select to authenticated
 using (user_id = (select auth.uid()));
@@ -133,6 +130,7 @@ grant select on public.staff_profiles to authenticated;
 revoke update on public.staff_profiles from authenticated;
 grant update (first_name, last_name, preferred_name) on public.staff_profiles to authenticated;
 grant insert on public.staff_profiles to authenticated;
+revoke insert, update, delete on public.user_role_assignments from authenticated;
 grant select on public.user_role_assignments to authenticated;
 
 comment on table public.staff_profiles is
