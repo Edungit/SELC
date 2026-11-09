@@ -1,23 +1,14 @@
 -- SELC initial identity and access schema.
--- Apply through the Supabase SQL editor or Supabase CLI after reviewing.
--- No real employee data should be inserted during development.
+-- Apply through the Supabase SQL editor or Supabase CLI after review.
+-- Use synthetic data only during development.
 
 create extension if not exists pgcrypto;
 
 create type public.selc_role as enum (
-  'super_administrator',
-  'hr_manager',
-  'department_manager',
-  'compliance_officer',
-  'staff_member'
+  'super_administrator', 'hr_manager', 'department_manager',
+  'compliance_officer', 'staff_member'
 );
-
-create type public.account_status as enum (
-  'invited',
-  'active',
-  'suspended',
-  'deactivated'
-);
+create type public.account_status as enum ('invited', 'active', 'suspended', 'deactivated');
 
 create table public.departments (
   id uuid primary key default gen_random_uuid(),
@@ -49,9 +40,6 @@ create table public.user_role_assignments (
   unique (user_id, role, department_id)
 );
 
--- Store only a cryptographic hash of a one-time invitation token.
--- Invitation redemption must occur in a trusted server route using a
--- server-only Supabase key; this table is deliberately not client-accessible.
 create table public.staff_invitations (
   id uuid primary key default gen_random_uuid(),
   email text not null,
@@ -80,30 +68,19 @@ create index invitations_email_idx on public.staff_invitations(lower(email));
 create index audit_events_created_idx on public.audit_events(created_at desc);
 
 create or replace function public.current_user_has_role(required_role public.selc_role)
-returns boolean
-language sql
-stable
-security definer
-set search_path = ''
+returns boolean language sql stable security definer set search_path = ''
 as $$
   select exists (
-    select 1
-    from public.user_role_assignments ura
-    where ura.user_id = (select auth.uid())
-      and ura.role = required_role
+    select 1 from public.user_role_assignments ura
+    where ura.user_id = (select auth.uid()) and ura.role = required_role
   );
 $$;
 
 create or replace function public.current_user_is_privileged()
-returns boolean
-language sql
-stable
-security definer
-set search_path = ''
+returns boolean language sql stable security definer set search_path = ''
 as $$
   select exists (
-    select 1
-    from public.user_role_assignments ura
+    select 1 from public.user_role_assignments ura
     where ura.user_id = (select auth.uid())
       and ura.role in ('super_administrator', 'hr_manager')
   );
@@ -115,8 +92,6 @@ alter table public.user_role_assignments enable row level security;
 alter table public.staff_invitations enable row level security;
 alter table public.audit_events enable row level security;
 
--- Authenticated users may see active department names; only privileged
--- administrators may change the directory.
 create policy "Authenticated users read active departments"
 on public.departments for select to authenticated
 using (is_active = true or public.current_user_is_privileged());
@@ -126,14 +101,10 @@ on public.departments for all to authenticated
 using (public.current_user_is_privileged())
 with check (public.current_user_is_privileged());
 
--- Staff can read their own basic profile. HR/Super Admin can read all.
 create policy "Staff read own profile or privileged read all"
 on public.staff_profiles for select to authenticated
 using (user_id = (select auth.uid()) or public.current_user_is_privileged());
 
--- Staff may update only their own row. Sensitive fields are intentionally
--- not present in this base profile table. Column grants should be tightened
--- further before enabling broad client-side profile editing.
 create policy "Staff update own basic profile"
 on public.staff_profiles for update to authenticated
 using (user_id = (select auth.uid()))
@@ -152,15 +123,15 @@ create policy "Users read own role assignments"
 on public.user_role_assignments for select to authenticated
 using (user_id = (select auth.uid()));
 
--- No policies are created for staff_invitations or audit_events.
--- They are accessible only to trusted server-side service operations.
--- Do not expose the service_role key to a browser or client bundle.
-
+-- Invitations and audit events have no client-facing policies.
+-- Trusted server-side operations only; never expose service_role credentials.
 revoke all on public.staff_invitations from anon, authenticated;
 revoke all on public.audit_events from anon, authenticated;
 
 grant select on public.departments to authenticated;
-grant select, update on public.staff_profiles to authenticated;
+grant select on public.staff_profiles to authenticated;
+revoke update on public.staff_profiles from authenticated;
+grant update (first_name, last_name, preferred_name) on public.staff_profiles to authenticated;
 grant insert on public.staff_profiles to authenticated;
 grant select on public.user_role_assignments to authenticated;
 
