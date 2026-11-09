@@ -21,9 +21,9 @@ alter table public.staff_leave_requests enable row level security;
 create policy "Staff read own leave requests"
 on public.staff_leave_requests for select to authenticated using(user_id=(select auth.uid()));
 create policy "Staff submit own leave requests"
-on public.staff_leave_requests for insert to authenticated with check(user_id=(select auth.uid()) and status='pending');
+on public.staff_leave_requests for insert to authenticated with check(user_id=(select auth.uid()) and status='pending' and reviewed_by is null and reviewed_at is null);
 create policy "Staff cancel own pending leave requests"
-on public.staff_leave_requests for update to authenticated using(user_id=(select auth.uid()) and status='pending') with check(user_id=(select auth.uid()) and status='cancelled');
+on public.staff_leave_requests for update to authenticated using(user_id=(select auth.uid()) and status='pending') with check(user_id=(select auth.uid()) and status='cancelled' and reviewed_by is null and reviewed_at is null);
 create policy "HR and super admins read and review leave requests"
 on public.staff_leave_requests for all to authenticated
 using(public.current_user_is_privileged())
@@ -35,7 +35,9 @@ create policy "Department managers update their department leave"
 on public.staff_leave_requests for update to authenticated
 using(exists(select 1 from public.user_role_assignments r where r.user_id=(select auth.uid()) and r.role='department_manager' and r.department_id=staff_leave_requests.department_id))
 with check(exists(select 1 from public.user_role_assignments r where r.user_id=(select auth.uid()) and r.role='department_manager' and r.department_id=staff_leave_requests.department_id));
-grant select,insert,update on public.staff_leave_requests to authenticated;
+grant select,insert on public.staff_leave_requests to authenticated;
+revoke update on public.staff_leave_requests from authenticated;
+grant update (status) on public.staff_leave_requests to authenticated;
 
 create table if not exists public.staff_availability (
  id uuid primary key default gen_random_uuid(),
