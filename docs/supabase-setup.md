@@ -21,3 +21,22 @@
 - `/update-password`: set a new password after recovery
 
 Invitation issuance/redemption and role provisioning are separate server-side features and are not yet complete.
+
+
+## SELC Vercel deployment URL
+
+Current deployment URL supplied by the project owner:
+
+`https://selc-git-main-selc1.vercel.app`
+
+Configure Supabase Authentication → URL Configuration with:
+
+- Site URL: `https://selc-git-main-selc1.vercel.app`
+- Redirect URL: `https://selc-git-main-selc1.vercel.app/auth/callback`
+- Local development callback: `http://localhost:3000/auth/callback`
+
+When the custom domain is connected, also add:
+
+- `https://staff.southeastlondoncare.co.uk/auth/callback`
+
+Do not remove any other required preview redirect patterns without checking the team's deployment workflow. The Vercel URL was supplied by the project owner; the live deployment and authentication flow still need browser testing.
