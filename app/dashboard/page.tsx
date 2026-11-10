@@ -59,6 +59,7 @@ export default async function DashboardPage(){
       <Link href="/leave" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><CalendarDays size={18}/> Leave and absence</Link>
       <Link href="/availability" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><CalendarDays size={18}/> Weekly availability</Link>
       <Link href="/shifts" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><BriefcaseBusiness size={18}/> My shifts</Link>
+      <Link href="/attendance" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><CheckCircle2 size={18}/> Attendance</Link>
      </nav>
      {canAccessManagement&&<><p className="mt-9 px-3 text-[10px] font-bold uppercase tracking-[.2em] text-blue-200/70">Management</p><nav className="mt-3 space-y-1">
       <Link href="/admin/applications" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><ClipboardCheck size={18}/> Staff applications <ArrowUpRight className="ml-auto" size={14}/></Link>
@@ -68,6 +69,7 @@ export default async function DashboardPage(){
       <Link href="/admin/compliance" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><ShieldCheck size={18}/> Compliance review <ArrowUpRight className="ml-auto" size={14}/></Link>
       <Link href="/admin/leave" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><CalendarDays size={18}/> Leave approvals <ArrowUpRight className="ml-auto" size={14}/></Link>
       <Link href="/admin/rota" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><BriefcaseBusiness size={18}/> Shift rota <ArrowUpRight className="ml-auto" size={14}/></Link>
+      <Link href="/admin/attendance" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><CheckCircle2 size={18}/> Attendance monitoring <ArrowUpRight className="ml-auto" size={14}/></Link>
      </nav></>}
     </div>
     <div className="mt-auto border-t border-white/10 p-5"><div className="rounded-xl bg-white/[.07] p-4"><div className="flex items-center gap-2 text-xs font-semibold text-blue-100"><ShieldCheck size={16}/> Secure staff access</div><p className="mt-2 text-[11px] leading-5 text-blue-100/65">Your portal access is protected by your assigned South East London Care role.</p></div><p className="mt-5 text-[10px] text-blue-200/50">© {new Date().getFullYear()} South East London Care</p></div>
