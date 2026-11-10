@@ -57,6 +57,8 @@ export default async function DashboardPage(){
       <Link href="/profile#documents" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><FileCheck2 size={18}/> My documents</Link>
       <Link href="/communications" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><MessageSquare size={18}/> Communications</Link>
       <Link href="/leave" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><CalendarDays size={18}/> Leave and absence</Link>
+      <Link href="/availability" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><CalendarDays size={18}/> Weekly availability</Link>
+      <Link href="/shifts" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/75 transition hover:bg-white/10 hover:text-white"><BriefcaseBusiness size={18}/> My shifts</Link>
      </nav>
      {canAccessManagement&&<><p className="mt-9 px-3 text-[10px] font-bold uppercase tracking-[.2em] text-blue-200/70">Management</p><nav className="mt-3 space-y-1">
       <Link href="/admin/applications" className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100 transition hover:bg-white/10 hover:text-white"><ClipboardCheck size={18}/> Staff applications <ArrowUpRight className="ml-auto" size={14}/></Link>
