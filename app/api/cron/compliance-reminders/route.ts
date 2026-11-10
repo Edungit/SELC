@@ -12,7 +12,7 @@ export async function GET(req:Request){
   admin.from("staff_document_records").select("id,user_id,document_type,expiry_date,review_status,application_track").in("review_status",["accepted","pending"]),
   admin.from("nurse_professional_details").select("user_id,registration_expiry,indemnity_expiry,registration_number,professional_body,indemnity_insurance"),
   admin.from("staff_training_records").select("id,user_id,course_name,expiry_date,verification_status").in("verification_status",["verified","pending"]),
-  admin.from("staff_compliance_requirements").select("application_track,requirement_type,document_type,mandatory").eq("active",true).eq("mandatory",true),
+  admin.from("staff_compliance_requirements").select("id,application_track,requirement_type,document_type,mandatory").eq("active",true).eq("mandatory",true),
   admin.from("staff_referees").select("user_id")
  ]);
  const err=pErr||dErr||nErr||tErr||rErr||refErr;if(err)return NextResponse.json({error:"Could not retrieve compliance data: "+err.message},{status:500});
@@ -22,7 +22,7 @@ export async function GET(req:Request){
  for(const d of docs??[]){if(!d.expiry_date)continue;const days=daysUntil(d.expiry_date,today);const stage=days<0?"overdue":windows.includes(days)?String(days)+"_days":null;if(stage)add(d.user_id,"document",d.id,d.expiry_date,stage);}
  for(const n of nurses??[]){for(const [field,type] of [["registration_expiry","nurse_registration"],["indemnity_expiry","nurse_indemnity"]] as const){const due=(n as any)[field];if(!due)continue;const days=daysUntil(due,today);const stage=days<0?"overdue":windows.includes(days)?String(days)+"_days":null;if(stage)add(n.user_id,type,n.user_id,due,stage);}}
  for(const t of training??[]){if(!t.expiry_date)continue;const days=daysUntil(t.expiry_date,today);const stage=days<0?"overdue":windows.includes(days)?String(days)+"_days":null;if(stage)add(t.user_id,"training",t.id,t.expiry_date,stage);}
- for(const profile of profiles??[]){const reqs=(requirements??[]).filter(x=>x.application_track===profile.application_track);for(const req of reqs){let present=false;if(req.requirement_type==="document")present=(docs??[]).some(d=>d.user_id===profile.user_id&&d.document_type===req.document_type&&d.review_status!=="rejected");else present=(refs??[]).filter(x=>x.user_id===profile.user_id).length>=2;if(!present){const id=profile.user_id+"_"+String(req.document_type||"referees");add(profile.user_id,"missing_requirement",id,null,"missing");}}}
+ for(const profile of profiles??[]){const reqs=(requirements??[]).filter(x=>x.application_track===profile.application_track);for(const req of reqs){let present=false;if(req.requirement_type==="document")present=(docs??[]).some(d=>d.user_id===profile.user_id&&d.document_type===req.document_type&&d.review_status!=="rejected");else present=(refs??[]).filter(x=>x.user_id===profile.user_id).length>=2;if(!present){add(profile.user_id,"missing_requirement",req.id,null,"missing");}}}
  const unique=new Map<string,any>();for(const x of candidates)unique.set([x.user_id,x.source_type,x.source_id,x.alert_stage].join("|"),x);
  let created=0,sent=0,failed=0;
  for(const item of unique.values()){
