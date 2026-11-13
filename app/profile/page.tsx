@@ -13,7 +13,7 @@ export default async function ProfilePage(){
   supabase.from("carer_professional_details").select("*").eq("user_id",user.id).maybeSingle(),
   supabase.from("staff_document_records").select("id,document_type,original_filename,review_status,expiry_date,sensitivity,uploaded_at").eq("user_id",user.id).order("uploaded_at",{ascending:false})
  ]);
- const track=profile?.application_track==="nurse"?"nurse":"carer";
+ const track="carer" as const;
  const {data:photo}=profile?.profile_photo_path?await supabase.storage.from("selc-profile-photos").createSignedUrl(profile.profile_photo_path,3600):{data:null};
  return <main className="min-h-screen bg-[#f4f6fa] px-4 py-8 sm:px-8"><div className="mx-auto max-w-5xl"><Link href="/dashboard" className="text-sm font-semibold text-selc-blue">← Dashboard</Link><div className="mt-6"><p className="text-xs font-bold uppercase tracking-[.18em] text-selc-red">Staff self-service</p><h1 className="mt-2 text-3xl font-bold text-selc-navy">My profile & documents</h1><p className="mt-2 text-sm text-slate-600">Complete your {track} profile and submit the records required for recruitment and compliance review.</p></div><ProfileWorkspace userId={user.id} track={track} profile={profile} profilePhotoUrl={photo?.signedUrl??null} details={details} referees={refs??[]} employment={employment??[]} nurse={nurse} carer={carer} documents={docs??[]}/></div></main>;
 }
