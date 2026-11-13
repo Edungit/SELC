@@ -36,6 +36,13 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(target);
   }
 
+  if (user && request.nextUrl.pathname.startsWith("/admin")) {
+    const { data: roles } = await supabase.from("user_role_assignments").select("role").eq("user_id", user.id);
+    if (!roles?.some(role => role.role === "super_administrator")) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+  }
+
   if (user && request.nextUrl.pathname === "/login") {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
