@@ -17,7 +17,7 @@ export default function RegisterForm(){
     <div><label htmlFor="lastName" className="mb-2 block text-sm font-semibold">Last name</label><input id="lastName" required maxLength={80} value={lastName} onChange={e=>setLastName(e.target.value)} autoComplete="family-name" className="w-full rounded-xl border border-slate-200 px-3 py-3"/></div>
    </div>
    
-   <div><label htmlFor="email" className="mb-2 block text-sm font-semibold">Email address</label><input id="email" type="email" required maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} autoComplete="email" className="w-full rounded-xl border border-slate-200 px-4 py-3"/></div>
+   <div><label htmlFor="email" className="mb-2 block text-sm font-semibold">Email Address</label><input id="email" type="email" required maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} autoComplete="email" className="w-full rounded-xl border border-slate-200 px-4 py-3"/></div>
    <div><label htmlFor="password" className="mb-2 block text-sm font-semibold">Create password</label><input id="password" type="password" required minLength={12} value={password} onChange={e=>setPassword(e.target.value)} autoComplete="new-password" className="w-full rounded-xl border border-slate-200 px-4 py-3"/><p className="mt-1 text-xs text-slate-500">Use at least 12 characters.</p></div>
    {error&&<p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
    <button disabled={busy} className="w-full rounded-xl bg-selc-red px-4 py-3.5 font-semibold text-white disabled:opacity-60">{busy?"Submitting…":"Create account"}</button>
