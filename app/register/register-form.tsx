@@ -20,8 +20,8 @@ export default function RegisterForm(){
    <div><label htmlFor="email" className="mb-2 block text-sm font-semibold">Email address</label><input id="email" type="email" required maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} autoComplete="email" className="w-full rounded-xl border border-slate-200 px-4 py-3"/></div>
    <div><label htmlFor="password" className="mb-2 block text-sm font-semibold">Create password</label><input id="password" type="password" required minLength={12} value={password} onChange={e=>setPassword(e.target.value)} autoComplete="new-password" className="w-full rounded-xl border border-slate-200 px-4 py-3"/><p className="mt-1 text-xs text-slate-500">Use at least 12 characters.</p></div>
    {error&&<p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
-   <button disabled={busy} className="w-full rounded-xl bg-selc-red px-4 py-3.5 font-semibold text-white disabled:opacity-60">{busy?"Submitting…":"Create carer account"}</button>
-   <p className="text-xs leading-5 text-slate-500">Verify your email to access your carer profile. No administrator approval is required.</p>
+   <button disabled={busy} className="w-full rounded-xl bg-selc-red px-4 py-3.5 font-semibold text-white disabled:opacity-60">{busy?"Submitting…":"Create account"}</button>
+   <p className="text-xs leading-5 text-slate-500">Verify your email to access your profile. No administrator approval is required.</p>
   </>}
   <p className="text-center text-sm text-slate-600">Already registered? <Link href="/login" className="font-semibold text-selc-blue">Sign in</Link></p>
  </form>;
