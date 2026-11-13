@@ -13,7 +13,8 @@ export async function GET(req:Request){
   admin.from("nurse_professional_details").select("user_id,registration_expiry,indemnity_expiry,registration_number,professional_body,indemnity_insurance"),
   admin.from("staff_training_records").select("id,user_id,course_name,expiry_date,verification_status").in("verification_status",["verified","pending"]),
   admin.from("staff_compliance_requirements").select("id,application_track,requirement_type,document_type,mandatory").eq("active",true).eq("mandatory",true),
-  admin.from("staff_referees").select("user_id")
+  admin.from("staff_referees").select("user_id"),
+  admin.from("user_role_assignments").select("user_id").in("role",["super_administrator","hr_manager","compliance_officer"])
  ]);
  const err=pErr||dErr||nErr||tErr||rErr||refErr||roleErr;if(err)return NextResponse.json({error:"Could not retrieve compliance data: "+err.message},{status:500});
  const candidates:any[]=[];const windows=[90,60,30,14,7,0];
