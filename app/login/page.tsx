@@ -1,20 +1,10 @@
 import Image from "next/image";
-import { Suspense } from "react";
+import {Suspense} from "react";
 import LoginForm from "./login-form";
-export default function LoginPage() {
-  return <main className="grid min-h-screen lg:grid-cols-[1.05fr_.95fr]">
-    <section className="relative hidden overflow-hidden bg-selc-navy px-12 py-14 text-white lg:flex lg:flex-col lg:justify-between">
-      <div className="absolute -right-32 -top-28 h-96 w-96 rounded-full border-[60px] border-white/5"/>
-      <div className="absolute -bottom-40 -left-24 h-[30rem] w-[30rem] rounded-full bg-selc-red/20 blur-3xl"/>
-      <div className="relative z-10"><div className="inline-flex rounded-2xl bg-white p-3"><Image src="https://southeastlondoncare.co.uk/wp-content/uploads/2025/03/selc.jpeg" alt="South East London Care" width={190} height={90} className="h-16 w-auto object-contain"/></div>
-      <p className="mt-12 text-sm font-semibold uppercase tracking-[.24em] text-blue-200">Carer registration portal</p><h1 className="mt-4 max-w-xl text-5xl font-bold leading-tight">Care starts with the people who make it happen.</h1><p className="mt-6 max-w-lg text-lg leading-8 text-blue-100">A secure place for carers to provide their information and upload the documents required by South East London Care.</p></div>
-      <div className="relative z-10 flex justify-between text-sm text-blue-200"><span>We love to care.</span><span>South East London Care</span></div>
-    </section>
-    <section className="flex items-center justify-center px-5 py-12 sm:px-10"><div className="w-full max-w-md">
-      <div className="mb-10 lg:hidden"><Image src="https://southeastlondoncare.co.uk/wp-content/uploads/2025/03/selc.jpeg" alt="South East London Care" width={190} height={90} className="h-16 w-auto object-contain"/></div>
-      <p className="text-sm font-bold uppercase tracking-[.18em] text-selc-red">South East London Care</p><h2 className="mt-3 text-3xl font-bold tracking-tight text-selc-ink">Welcome back</h2><p className="mt-2 text-slate-500">Sign in to your carer account.</p>
-      <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-panel sm:p-8"><Suspense fallback={<p className="text-sm text-slate-500">Loading sign-in…</p>}><LoginForm/></Suspense></div>
-      <p className="mt-8 text-center text-xs text-slate-400">Protected staff access · South East London Care</p>
-    </div></section>
-  </main>;
-}
+const carerImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGA18j-HjemEWRRMAy6sYNPZTQP1eRa19dNrZt5UhG8yFiBvpp5vSv37En&s=10";
+export default function LoginPage(){return <main className="min-h-screen bg-[#f4f6fa] lg:grid lg:grid-cols-[1.08fr_.92fr]">
+<section className="relative flex min-h-[310px] flex-col justify-between overflow-hidden bg-[#102746] px-6 py-7 text-white sm:min-h-[390px] sm:px-10 sm:py-9 lg:min-h-screen lg:px-14 lg:py-12" style={{backgroundImage:"linear-gradient(90deg,rgba(9,28,52,.92),rgba(9,28,52,.58)),url('"+carerImage+"')",backgroundSize:"cover",backgroundPosition:"center"}}>
+<div className="absolute inset-0 bg-gradient-to-t from-[#081b33]/80 via-transparent to-[#081b33]/15"/>
+<div className="relative z-10"><div className="inline-flex rounded-2xl bg-white px-4 py-3 shadow-xl"><Image src="https://southeastlondoncare.co.uk/wp-content/uploads/2025/03/selc.jpeg" alt="South East London Care" width={320} height={150} priority className="h-20 w-auto object-contain sm:h-24"/></div><p className="mt-9 text-xs font-bold uppercase tracking-[.24em] text-red-200 sm:mt-14">Carer registration portal</p><h1 className="mt-3 max-w-xl text-3xl font-extrabold leading-tight sm:text-5xl">Your care journey starts here.</h1><p className="mt-4 max-w-lg text-sm leading-6 text-blue-50 sm:mt-6 sm:text-lg sm:leading-8">A simple, secure way to share your details and submit the documents needed to join South East London Care.</p></div>
+<div className="relative z-10 mt-10 flex items-center justify-between text-xs text-white/80"><span>We love to care.</span><span>South East London Care</span></div></section>
+<section className="flex items-center justify-center px-5 py-10 sm:px-10 sm:py-14"><div className="w-full max-w-md"><div className="mb-7 flex items-center gap-3 lg:hidden"><Image src="https://southeastlondoncare.co.uk/wp-content/uploads/2025/03/selc.jpeg" alt="South East London Care" width={240} height={110} className="h-16 w-auto object-contain"/></div><p className="text-xs font-bold uppercase tracking-[.18em] text-[#C9343D]">Carer portal</p><h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[#102746]">Welcome back</h2><p className="mt-2 text-sm text-slate-600">Sign in to continue your carer registration.</p><div className="mt-7 rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_24px_70px_rgba(16,39,70,.10)] sm:p-8"><Suspense fallback={<p className="text-sm text-slate-500">Loading sign-in…</p>}><LoginForm/></Suspense></div><p className="mt-7 text-center text-xs text-slate-500">Secure access · South East London Care</p></div></section></main>}
